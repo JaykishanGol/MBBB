@@ -251,7 +251,7 @@ export default function DetailsPage() {
               onLoad={() => setIsBackdropLoaded(true)}
               priority
               quality={100}
-              sizes="100vw"
+              sizes="(max-width: 768px) 200vw, 100vw"
             />
           </div>
         </div>
