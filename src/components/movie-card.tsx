@@ -15,7 +15,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
 
   return (
     <Link href={`/${movie.media_type}/${movie.id}`} className="block h-full w-full group/card">
-      <Card className="group-hover/card:border-primary group-focus-visible/card:ring-2 group-focus-visible/card:ring-ring group-focus-visible/card:ring-offset-2 relative h-full w-full overflow-hidden rounded-lg border-2 border-transparent transition-all duration-300 aspect-[2/3]">
+      <Card className="group-hover/card:border-primary group-hover/card:shadow-xl group-hover/card:-translate-y-1 group-focus-visible/card:ring-2 group-focus-visible/card:ring-ring group-focus-visible/card:ring-offset-2 relative h-full w-full overflow-hidden rounded-lg border-2 border-transparent transition-all duration-300 ease-out aspect-[2/3]">
         <div className="overflow-hidden h-full">
           {movie.poster_path ? (
             <Image
@@ -23,7 +23,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
               alt={`Poster for ${movie.title}`}
               fill
               className={cn(
-                "h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105",
+                "h-full w-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-105",
                 isLoaded ? 'scale-100 opacity-100' : 'scale-110 opacity-0'
               )}
               onLoad={() => setIsLoaded(true)}
@@ -37,9 +37,9 @@ export function MovieCard({ movie }: { movie: Movie }) {
           )}
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent transition-opacity duration-300" />
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+        <div className="absolute bottom-0 left-0 right-0 p-4 text-white transition-transform duration-300 ease-out group-hover/card:translate-y-0">
           <h3 className="truncate font-headline text-lg font-bold leading-tight">
             {movie.title}
           </h3>

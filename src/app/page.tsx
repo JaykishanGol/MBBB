@@ -10,17 +10,29 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 async function PopularMoviesCarousel() {
   const movies = await getPopular('movie');
-  return <MovieCarousel title="Popular Movies" movies={movies} />;
+  return (
+    <div className="animate-fade-in-up" style={{ animationDelay: '0ms', animationFillMode: 'both' }}>
+      <MovieCarousel title="Popular Movies" movies={movies} />
+    </div>
+  );
 }
 
 async function TopRatedTvCarousel() {
   const shows = await getTopRated('tv');
-  return <MovieCarousel title="Top Rated TV Shows" movies={shows} />;
+  return (
+    <div className="animate-fade-in-up" style={{ animationDelay: '100ms', animationFillMode: 'both' }}>
+      <MovieCarousel title="Top Rated TV Shows" movies={shows} />
+    </div>
+  );
 }
 
 async function UpcomingMoviesCarousel() {
   const movies = await getUpcoming('movie');
-  return <MovieCarousel title="Upcoming Movies" movies={movies} />;
+  return (
+    <div className="animate-fade-in-up" style={{ animationDelay: '200ms', animationFillMode: 'both' }}>
+      <MovieCarousel title="Upcoming Movies" movies={movies} />
+    </div>
+  );
 }
 
 function CarouselSkeleton() {

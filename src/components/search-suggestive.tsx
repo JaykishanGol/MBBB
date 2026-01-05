@@ -91,23 +91,23 @@ export function SearchSuggestive() {
         />
       </form>
       {showSuggestions && (
-        <div className="absolute top-full mt-2 w-full rounded-md border bg-background shadow-lg z-50 overflow-hidden">
+        <div className="absolute top-full mt-2 w-full rounded-md border bg-background shadow-lg z-50 overflow-hidden animate-slide-in-from-top">
           {isLoading ? (
             <div className="flex items-center justify-center p-4">
               <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
             </div>
           ) : results.length > 0 ? (
             <ul className="divide-y">
-              {results.map((item) => (
-                <li key={item.id} className="hover:bg-accent">
-                  <Link href={`/${item.media_type}/${item.id}`} onClick={handleResultClick} className="flex items-center gap-4 p-3">
+              {results.map((item, index) => (
+                <li key={item.id} className="hover:bg-accent transition-colors duration-200" style={{ animationDelay: `${index * 50}ms` }}>
+                  <Link href={`/${item.media_type}/${item.id}`} onClick={handleResultClick} className="flex items-center gap-4 p-3 transition-all duration-200">
                     <div className="relative h-16 w-11 flex-shrink-0 overflow-hidden rounded-sm bg-muted">
                       {item.poster_path ? (
                         <Image 
                           src={item.poster_path} 
                           alt={item.title} 
                           fill 
-                          className="object-cover" 
+                          className="object-cover transition-transform duration-300 hover:scale-105" 
                           sizes="44px"
                           loading="lazy"
                         />
