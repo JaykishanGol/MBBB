@@ -173,9 +173,10 @@ export default function DetailsPage() {
       if (window.innerWidth >= MOBILE_BREAKPOINT) {
         if (ticking) return;
         ticking = true;
-        window.requestAnimationFrame(() => {
+        rafId = window.requestAnimationFrame(() => {
           setScrollPosition(0);
           ticking = false;
+          rafId = null;
         });
         return;
       }
@@ -189,6 +190,7 @@ export default function DetailsPage() {
           const scrollPercentage = Math.min((position / viewportHeight) * MAX_PARALLAX_OFFSET, MAX_PARALLAX_OFFSET);
           setScrollPosition(scrollPercentage);
           ticking = false;
+          rafId = null;
         });
       }
     };
@@ -202,7 +204,7 @@ export default function DetailsPage() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
-      if (rafId) {
+      if (rafId !== null) {
         window.cancelAnimationFrame(rafId);
       }
     };
