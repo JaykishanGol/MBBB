@@ -166,37 +166,59 @@ export default function DetailsPage() {
 
   useEffect(() => {
     let ticking = false;
+    let rafId: number | null = null;
     
     const handleScroll = () => {
       // Only apply parallax effect on mobile devices
       if (window.innerWidth >= MOBILE_BREAKPOINT) {
-        if (scrollPosition !== 0) {
-          setScrollPosition(0);
+        if (ticking) return;
+        ticking = true;
+        try {
+          rafId = window.requestAnimationFrame(() => {
+            setScrollPosition(0);
+            ticking = false;
+            rafId = null;
+          });
+        } catch (e) {
+          // requestAnimationFrame failure is extremely rare; reset ticking to allow retry
+          ticking = false;
         }
         return;
       }
       
       if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const position = window.scrollY;
-          const viewportHeight = window.innerHeight;
-          // Calculate scroll progress as percentage (0 to MAX_PARALLAX_OFFSET)
-          const scrollPercentage = Math.min((position / viewportHeight) * MAX_PARALLAX_OFFSET, MAX_PARALLAX_OFFSET);
-          setScrollPosition(scrollPercentage);
-          ticking = false;
-        });
         ticking = true;
+        try {
+          rafId = window.requestAnimationFrame(() => {
+            const position = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            // Calculate scroll progress as percentage (0 to MAX_PARALLAX_OFFSET)
+            const scrollPercentage = Math.min((position / viewportHeight) * MAX_PARALLAX_OFFSET, MAX_PARALLAX_OFFSET);
+            setScrollPosition(scrollPercentage);
+            ticking = false;
+            rafId = null;
+          });
+        } catch (e) {
+          // requestAnimationFrame failure is extremely rare; reset ticking to allow retry
+          ticking = false;
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
+    
+    // Initial call to set correct state
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId);
+      }
     };
-  }, [scrollPosition]);
+  }, [MAX_PARALLAX_OFFSET, MOBILE_BREAKPOINT]);
 
 
   if (!item) {
@@ -211,7 +233,7 @@ export default function DetailsPage() {
           <div 
             className={cn(
               "relative h-full w-[200%] md:w-full",
-              "md:will-change-auto will-change-transform"
+              "md:will-change-auto will-change-transform transition-transform duration-100 ease-out"
             )}
             style={{
               transform: `translateX(-${scrollPosition}%)`,
@@ -251,7 +273,8 @@ export default function DetailsPage() {
                   )}
                   onLoad={() => setIsPosterLoaded(true)}
                   priority
-                  sizes="(max-width: 1024px) 100vw, 288px"
+                  quality={100}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 288px"
                 />
               </div>
               <DetailActions item={item} />
