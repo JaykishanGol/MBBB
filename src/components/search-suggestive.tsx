@@ -99,15 +99,15 @@ export function SearchSuggestive() {
           ) : results.length > 0 ? (
             <ul className="divide-y">
               {results.map((item, index) => (
-                <li key={item.id} className="hover:bg-accent transition-colors duration-200" style={{ animationDelay: `${index * 50}ms` }}>
-                  <Link href={`/${item.media_type}/${item.id}`} onClick={handleResultClick} className="flex items-center gap-4 p-3 transition-all duration-200">
-                    <div className="relative h-16 w-11 flex-shrink-0 overflow-hidden rounded-sm bg-muted">
+                <li key={item.id} className="hover:bg-accent smooth-transition" style={{ animationDelay: `${index * 50}ms` }}>
+                  <Link href={`/${item.media_type}/${item.id}`} onClick={handleResultClick} className="flex items-center gap-4 p-3 smooth-transition">
+                    <div className="relative h-16 w-11 flex-shrink-0 overflow-hidden rounded-sm bg-muted image-container">
                       {item.poster_path ? (
                         <Image 
                           src={item.poster_path} 
                           alt={item.title} 
                           fill 
-                          className="object-cover transition-transform duration-300 hover:scale-105" 
+                          className="object-cover transition-transform duration-300 ease-out hover:scale-105" 
                           sizes="44px"
                           loading="lazy"
                         />

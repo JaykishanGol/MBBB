@@ -229,10 +229,10 @@ export default function DetailsPage() {
   return (
     <div className="relative min-h-screen">
       {item.backdrop_path && (
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden image-container">
           <div 
             className={cn(
-              "relative h-full w-[200%] md:w-full",
+              "relative h-full w-[200%] md:w-full gpu-accelerate",
               "md:will-change-auto will-change-transform transition-transform duration-100 ease-out"
             )}
             style={{
@@ -244,9 +244,9 @@ export default function DetailsPage() {
               alt={`Backdrop for ${item.title}`}
               fill
               className={cn(
-                'transition-all duration-1000 ease-in-out',
+                'transition-all duration-700 ease-out',
                 'object-cover object-center md:object-top',
-                isBackdropLoaded ? 'blur-none' : 'blur-md'
+                isBackdropLoaded ? 'blur-none opacity-100' : 'blur-md opacity-0'
               )}
               onLoad={() => setIsBackdropLoaded(true)}
               priority
@@ -262,14 +262,14 @@ export default function DetailsPage() {
         <div className="flex w-full flex-col items-start gap-12 lg:flex-row">
           <aside className="w-full self-start lg:w-72 lg:flex-shrink-0">
             <div className="sticky top-24 space-y-6">
-              <div className="relative aspect-[2/3] w-full overflow-hidden rounded-xl shadow-2xl">
+              <div className="relative aspect-[2/3] w-full overflow-hidden rounded-xl shadow-2xl image-container">
                 <Image
                   src={item.poster_path}
                   alt={`Poster for ${item.title}`}
                   fill
                   className={cn(
-                    'object-cover transition-all duration-1000 ease-in-out',
-                    isPosterLoaded ? 'scale-100 opacity-100' : 'scale-110 opacity-0'
+                    'object-cover transition-all duration-700 ease-out',
+                    isPosterLoaded ? 'scale-100 opacity-100' : 'scale-105 opacity-0'
                   )}
                   onLoad={() => setIsPosterLoaded(true)}
                   priority

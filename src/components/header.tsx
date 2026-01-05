@@ -33,9 +33,9 @@ export function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 smooth-transition gpu-accelerate">
       <div className="container flex h-16 items-center gap-4">
-        <Link href="/" className="mr-4 hidden md:flex transition-transform duration-200 hover:scale-105">
+        <Link href="/" className="mr-4 hidden md:flex transition-transform duration-200 ease-out hover:scale-105">
           <Logo />
         </Link>
         
@@ -45,7 +45,7 @@ export function Header() {
               key={item.href}
               variant={pathname === item.href ? 'secondary' : 'ghost'}
               asChild
-              className="font-semibold"
+              className="font-semibold smooth-transition"
             >
               <Link href={item.href}>
                 <item.icon className="h-4 w-4 md:mr-2" />
