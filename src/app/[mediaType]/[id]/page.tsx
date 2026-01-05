@@ -180,6 +180,7 @@ export default function DetailsPage() {
             rafId = null;
           });
         } catch (e) {
+          // requestAnimationFrame failure is extremely rare; reset ticking to allow retry
           ticking = false;
         }
         return;
@@ -198,6 +199,7 @@ export default function DetailsPage() {
             rafId = null;
           });
         } catch (e) {
+          // requestAnimationFrame failure is extremely rare; reset ticking to allow retry
           ticking = false;
         }
       }
