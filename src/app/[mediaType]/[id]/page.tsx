@@ -142,7 +142,8 @@ export default function DetailsPage() {
   const id = params.id as string;
 
   const [item, setItem] = useState<Movie | null>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isBackdropLoaded, setIsBackdropLoaded] = useState(false);
+  const [isPosterLoaded, setIsPosterLoaded] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -173,8 +174,9 @@ export default function DetailsPage() {
           fill
           className={cn(
             'object-cover object-top transition-all duration-1000 ease-in-out',
-            isLoaded ? 'blur-none' : 'blur-md'
+            isBackdropLoaded ? 'blur-none' : 'blur-md'
           )}
+          onLoad={() => setIsBackdropLoaded(true)}
           priority
         />
       )}
@@ -191,9 +193,9 @@ export default function DetailsPage() {
                   fill
                   className={cn(
                     'object-cover transition-all duration-1000 ease-in-out',
-                    isLoaded ? 'scale-100 opacity-100' : 'scale-110 opacity-0'
+                    isPosterLoaded ? 'scale-100 opacity-100' : 'scale-110 opacity-0'
                   )}
-                  onLoad={() => setIsLoaded(true)}
+                  onLoad={() => setIsPosterLoaded(true)}
                   priority
                   sizes="(max-width: 1024px) 100vw, 288px"
                 />
