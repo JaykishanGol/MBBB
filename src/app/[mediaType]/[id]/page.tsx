@@ -144,6 +144,7 @@ export default function DetailsPage() {
   const [item, setItem] = useState<Movie | null>(null);
   const [isBackdropLoaded, setIsBackdropLoaded] = useState(false);
   const [isPosterLoaded, setIsPosterLoaded] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
@@ -159,6 +160,22 @@ export default function DetailsPage() {
     fetchData();
   }, [mediaType, id]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      // Calculate scroll progress as percentage (0 to 50)
+      const scrollPercentage = Math.min((position / viewportHeight) * 50, 50);
+      setScrollPosition(scrollPercentage);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
   if (!item) {
     // TODO: Add a skeleton loader
@@ -168,17 +185,30 @@ export default function DetailsPage() {
   return (
     <div className="relative min-h-screen">
       {item.backdrop_path && (
-        <Image
-          src={item.backdrop_path}
-          alt={`Backdrop for ${item.title}`}
-          fill
-          className={cn(
-            'object-cover object-top transition-all duration-1000 ease-in-out',
-            isBackdropLoaded ? 'blur-none' : 'blur-md'
-          )}
-          onLoad={() => setIsBackdropLoaded(true)}
-          priority
-        />
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="relative h-full w-[200%] md:w-full"
+            style={{
+              transform: `translateX(-${scrollPosition}%)`,
+              transition: 'transform 0.1s ease-out',
+            }}
+          >
+            <Image
+              src={item.backdrop_path}
+              alt={`Backdrop for ${item.title}`}
+              fill
+              className={cn(
+                'transition-all duration-1000 ease-in-out',
+                'object-cover object-center md:object-top',
+                isBackdropLoaded ? 'blur-none' : 'blur-md'
+              )}
+              onLoad={() => setIsBackdropLoaded(true)}
+              priority
+              quality={100}
+              sizes="100vw"
+            />
+          </div>
+        </div>
       )}
       <div className="absolute inset-0 bg-black/70" />
 
