@@ -4,6 +4,11 @@ import type { Movie, TmdbItem, TmdbItemDetails } from './types';
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 
+// Image size constants for optimized loading
+// Using smaller sizes improves load times while maintaining quality for typical display sizes
+const POSTER_SIZE = 'w780'; // 780px wide - sufficient for most displays (2x for 390px cards)
+const BACKDROP_SIZE = 'w1280'; // 1280px wide - good for most screens
+
 async function fetchFromTmdb(endpoint: string, params: Record<string, string> = {}) {
   const url = new URL(`${API_BASE_URL}/${endpoint}`);
   // Read the environment variable directly inside the function
@@ -36,8 +41,8 @@ function normalizeTmdbData(item: TmdbItem, mediaType?: 'movie' | 'tv'): Movie {
     id: item.id,
     title: item.title || item.name || 'Unknown Title',
     overview: item.overview,
-    poster_path: item.poster_path ? `${IMAGE_BASE_URL}/original${item.poster_path}` : '',
-    backdrop_path: item.backdrop_path ? `${IMAGE_BASE_URL}/original${item.backdrop_path}` : '',
+    poster_path: item.poster_path ? `${IMAGE_BASE_URL}/${POSTER_SIZE}${item.poster_path}` : '',
+    backdrop_path: item.backdrop_path ? `${IMAGE_BASE_URL}/${BACKDROP_SIZE}${item.backdrop_path}` : '',
     release_date: item.release_date || item.first_air_date || '',
     vote_average: item.vote_average,
     media_type: type,
