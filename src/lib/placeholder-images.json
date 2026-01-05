@@ -1,0 +1,124 @@
+{
+  "placeholderImages": [
+    {
+      "id": "poster-1",
+      "description": "Sci-fi movie poster with a spaceship.",
+      "imageUrl": "https://picsum.photos/seed/moviespot1/500/750",
+      "imageHint": "science fiction spaceship"
+    },
+    {
+      "id": "backdrop-1",
+      "description": "Wide shot of a futuristic city skyline.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide1/1920/1080",
+      "imageHint": "futuristic city"
+    },
+    {
+      "id": "poster-2",
+      "description": "Fantasy movie poster with a dragon.",
+      "imageUrl": "https://picsum.photos/seed/moviespot2/500/750",
+      "imageHint": "fantasy dragon"
+    },
+    {
+      "id": "backdrop-2",
+      "description": "Wide shot of an enchanted forest.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide2/1920/1080",
+      "imageHint": "enchanted forest"
+    },
+    {
+      "id": "poster-3",
+      "description": "Action movie poster with an explosion.",
+      "imageUrl": "https://picsum.photos/seed/moviespot3/500/750",
+      "imageHint": "action explosion"
+    },
+    {
+      "id": "backdrop-3",
+      "description": "Wide shot of a car chase in a desert.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide3/1920/1080",
+      "imageHint": "car chase"
+    },
+    {
+      "id": "poster-4",
+      "description": "Comedy movie poster with a funny character.",
+      "imageUrl": "https://picsum.photos/seed/moviespot4/500/750",
+      "imageHint": "comedy funny"
+    },
+    {
+      "id": "backdrop-4",
+      "description": "Wide shot of a colorful cityscape.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide4/1920/1080",
+      "imageHint": "colorful city"
+    },
+    {
+      "id": "poster-5",
+      "description": "Horror movie poster with a spooky house.",
+      "imageUrl": "https://picsum.photos/seed/moviespot5/500/750",
+      "imageHint": "horror house"
+    },
+    {
+      "id": "backdrop-5",
+      "description": "Wide shot of a misty graveyard.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide5/1920/1080",
+      "imageHint": "misty graveyard"
+    },
+    {
+      "id": "poster-6",
+      "description": "Drama movie poster with two actors.",
+      "imageUrl": "https://picsum.photos/seed/moviespot6/500/750",
+      "imageHint": "drama intense"
+    },
+    {
+      "id": "backdrop-6",
+      "description": "Wide shot of a courtroom.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide6/1920/1080",
+      "imageHint": "courtroom drama"
+    },
+    {
+      "id": "poster-7",
+      "description": "Romantic movie poster with a couple.",
+      "imageUrl": "https://picsum.photos/seed/moviespot7/500/750",
+      "imageHint": "romance couple"
+    },
+    {
+      "id": "backdrop-7",
+      "description": "Wide shot of a sunset over a beach.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide7/1920/1080",
+      "imageHint": "sunset beach"
+    },
+    {
+      "id": "poster-8",
+      "description": "Documentary poster about nature.",
+      "imageUrl": "https://picsum.photos/seed/moviespot8/500/750",
+      "imageHint": "nature documentary"
+    },
+    {
+      "id": "backdrop-8",
+      "description": "Wide shot of a mountain range.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide8/1920/1080",
+      "imageHint": "mountain range"
+    },
+    {
+      "id": "poster-9",
+      "description": "Animated movie poster with cute characters.",
+      "imageUrl": "https://picsum.photos/seed/moviespot9/500/750",
+      "imageHint": "animation cute"
+    },
+    {
+      "id": "backdrop-9",
+      "description": "Wide shot of a magical cartoon world.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide9/1920/1080",
+      "imageHint": "cartoon world"
+    },
+     {
+      "id": "poster-10",
+      "description": "Thriller movie poster with a mysterious figure.",
+      "imageUrl": "https://picsum.photos/seed/moviespot10/500/750",
+      "imageHint": "thriller mystery"
+    },
+    {
+      "id": "backdrop-10",
+      "description": "Wide shot of a dark alley at night.",
+      "imageUrl": "https://picsum.photos/seed/moviespot-wide10/1920/1080",
+      "imageHint": "dark alley"
+    }
+  ]
+}
