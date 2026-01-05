@@ -171,13 +171,17 @@ export default function DetailsPage() {
     const handleScroll = () => {
       // Only apply parallax effect on mobile devices
       if (window.innerWidth >= MOBILE_BREAKPOINT) {
-        if (scrollPosition !== 0) {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
           setScrollPosition(0);
-        }
+          ticking = false;
+        });
         return;
       }
       
       if (!ticking) {
+        ticking = true;
         rafId = window.requestAnimationFrame(() => {
           const position = window.scrollY;
           const viewportHeight = window.innerHeight;
@@ -186,7 +190,6 @@ export default function DetailsPage() {
           setScrollPosition(scrollPercentage);
           ticking = false;
         });
-        ticking = true;
       }
     };
 
@@ -203,7 +206,7 @@ export default function DetailsPage() {
         window.cancelAnimationFrame(rafId);
       }
     };
-  }, [scrollPosition]);
+  }, [MAX_PARALLAX_OFFSET, MOBILE_BREAKPOINT]);
 
 
   if (!item) {
