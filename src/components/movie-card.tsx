@@ -22,6 +22,7 @@ export function MovieCard({ movie }: { movie: Movie }) {
               src={movie.poster_path}
               alt={`Poster for ${movie.title}`}
               fill
+              unoptimized
               className={cn(
                 "h-full w-full object-cover transition-all duration-700 ease-in-out group-hover/card:scale-105",
                 isLoaded ? 'scale-100 opacity-100' : 'scale-110 opacity-0'
