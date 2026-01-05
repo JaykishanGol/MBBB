@@ -166,6 +166,7 @@ export default function DetailsPage() {
 
   useEffect(() => {
     let ticking = false;
+    let rafId: number | null = null;
     
     const handleScroll = () => {
       // Only apply parallax effect on mobile devices
@@ -177,7 +178,7 @@ export default function DetailsPage() {
       }
       
       if (!ticking) {
-        window.requestAnimationFrame(() => {
+        rafId = window.requestAnimationFrame(() => {
           const position = window.scrollY;
           const viewportHeight = window.innerHeight;
           // Calculate scroll progress as percentage (0 to MAX_PARALLAX_OFFSET)
@@ -191,10 +192,16 @@ export default function DetailsPage() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleScroll, { passive: true });
+    
+    // Initial call to set correct state
+    handleScroll();
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
     };
   }, [scrollPosition]);
 
@@ -211,7 +218,7 @@ export default function DetailsPage() {
           <div 
             className={cn(
               "relative h-full w-[200%] md:w-full",
-              "md:will-change-auto will-change-transform"
+              "md:will-change-auto will-change-transform transition-transform duration-100 ease-out"
             )}
             style={{
               transform: `translateX(-${scrollPosition}%)`,
@@ -251,7 +258,8 @@ export default function DetailsPage() {
                   )}
                   onLoad={() => setIsPosterLoaded(true)}
                   priority
-                  sizes="(max-width: 1024px) 100vw, 288px"
+                  quality={100}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 288px"
                 />
               </div>
               <DetailActions item={item} />
