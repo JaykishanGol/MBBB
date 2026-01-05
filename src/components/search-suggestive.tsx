@@ -103,7 +103,14 @@ export function SearchSuggestive() {
                   <Link href={`/${item.media_type}/${item.id}`} onClick={handleResultClick} className="flex items-center gap-4 p-3">
                     <div className="relative h-16 w-11 flex-shrink-0 overflow-hidden rounded-sm bg-muted">
                       {item.poster_path ? (
-                        <Image src={item.poster_path} alt={item.title} fill className="object-cover" />
+                        <Image 
+                          src={item.poster_path} 
+                          alt={item.title} 
+                          fill 
+                          className="object-cover" 
+                          sizes="44px"
+                          loading="lazy"
+                        />
                       ) : (
                         <div className="flex h-full w-full items-center justify-center">
                           <Film className="h-6 w-6 text-muted-foreground" />

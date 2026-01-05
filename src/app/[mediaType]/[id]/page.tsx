@@ -194,6 +194,8 @@ export default function DetailsPage() {
                     isLoaded ? 'scale-100 opacity-100' : 'scale-110 opacity-0'
                   )}
                   onLoad={() => setIsLoaded(true)}
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 288px"
                 />
               </div>
               <DetailActions item={item} />
