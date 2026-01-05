@@ -22,6 +22,22 @@ body {
     backface-visibility: hidden;
     will-change: transform;
   }
+  
+  /* Optimized image container for smoother loading */
+  .image-container {
+    contain: layout style;
+    transform: translateZ(0);
+  }
+}
+
+/* Optimize tap highlight for interactive elements */
+a, button, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Hardware accelerated scrolling for carousels */
+.embla {
+  -webkit-overflow-scrolling: touch;
 }
 
 @layer base {

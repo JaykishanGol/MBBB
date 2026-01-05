@@ -7,7 +7,7 @@ const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
 // Image size constants for optimized loading
 // Using smaller sizes improves load times while maintaining quality for typical display sizes
 const POSTER_SIZE = 'w780'; // 780px wide - sufficient for most displays (2x for 390px cards)
-const BACKDROP_SIZE = 'w1280'; // 1280px wide - good for most screens
+const BACKDROP_SIZE = 'w1920'; // 1920px wide - high quality for HD displays
 
 async function fetchFromTmdb(endpoint: string, params: Record<string, string> = {}) {
   const url = new URL(`${API_BASE_URL}/${endpoint}`);
