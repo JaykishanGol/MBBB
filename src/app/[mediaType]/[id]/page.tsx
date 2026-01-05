@@ -196,7 +196,7 @@ export default function DetailsPage() {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
     };
-  }, [scrollPosition, MOBILE_BREAKPOINT, MAX_PARALLAX_OFFSET]);
+  }, [scrollPosition]);
 
 
   if (!item) {
@@ -209,7 +209,10 @@ export default function DetailsPage() {
       {item.backdrop_path && (
         <div className="absolute inset-0 overflow-hidden">
           <div 
-            className="relative h-full w-[200%] md:w-full will-change-transform"
+            className={cn(
+              "relative h-full w-[200%] md:w-full",
+              "md:will-change-auto will-change-transform"
+            )}
             style={{
               transform: `translateX(-${scrollPosition}%)`,
             }}
