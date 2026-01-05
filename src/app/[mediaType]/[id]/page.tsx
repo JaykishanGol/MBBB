@@ -146,6 +146,10 @@ export default function DetailsPage() {
   const [isPosterLoaded, setIsPosterLoaded] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
 
+  // Constants for parallax effect
+  const MAX_PARALLAX_OFFSET = 50; // Maximum horizontal scroll offset in percentage
+  const MOBILE_BREAKPOINT = 768; // Tailwind 'md' breakpoint
+
   useEffect(() => {
     async function fetchData() {
         if (mediaType !== 'movie' && mediaType !== 'tv') {
@@ -164,12 +168,20 @@ export default function DetailsPage() {
     let ticking = false;
     
     const handleScroll = () => {
+      // Only apply parallax effect on mobile devices
+      if (window.innerWidth >= MOBILE_BREAKPOINT) {
+        if (scrollPosition !== 0) {
+          setScrollPosition(0);
+        }
+        return;
+      }
+      
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const position = window.scrollY;
           const viewportHeight = window.innerHeight;
-          // Calculate scroll progress as percentage (0 to 50)
-          const scrollPercentage = Math.min((position / viewportHeight) * 50, 50);
+          // Calculate scroll progress as percentage (0 to MAX_PARALLAX_OFFSET)
+          const scrollPercentage = Math.min((position / viewportHeight) * MAX_PARALLAX_OFFSET, MAX_PARALLAX_OFFSET);
           setScrollPosition(scrollPercentage);
           ticking = false;
         });
@@ -178,11 +190,13 @@ export default function DetailsPage() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
-  }, []);
+  }, [scrollPosition, MOBILE_BREAKPOINT, MAX_PARALLAX_OFFSET]);
 
 
   if (!item) {
