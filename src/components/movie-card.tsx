@@ -23,12 +23,11 @@ export function MovieCard({ movie }: { movie: Movie }) {
               alt={`Poster for ${movie.title}`}
               fill
               className={cn(
-                "h-full w-full object-cover transition-transform duration-500 ease-out group-hover/card:scale-105",
-                isLoaded ? 'scale-100 opacity-100' : 'scale-110 opacity-0'
+                "h-full w-full object-cover transition-all duration-700 ease-out group-hover/card:scale-105",
+                isLoaded ? 'scale-100 opacity-100 blur-none' : 'scale-105 opacity-0 blur-sm'
               )}
               onLoad={() => setIsLoaded(true)}
               sizes="(max-width: 768px) 50vw, (max-width: 1200px) 25vw, 20vw"
-              loading="lazy"
             />
           ) : (
             <div className="aspect-[2/3] w-full bg-muted flex items-center justify-center">
