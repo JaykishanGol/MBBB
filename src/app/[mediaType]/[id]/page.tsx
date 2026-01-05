@@ -161,12 +161,20 @@ export default function DetailsPage() {
   }, [mediaType, id]);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      const position = window.scrollY;
-      const viewportHeight = window.innerHeight;
-      // Calculate scroll progress as percentage (0 to 50)
-      const scrollPercentage = Math.min((position / viewportHeight) * 50, 50);
-      setScrollPosition(scrollPercentage);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const position = window.scrollY;
+          const viewportHeight = window.innerHeight;
+          // Calculate scroll progress as percentage (0 to 50)
+          const scrollPercentage = Math.min((position / viewportHeight) * 50, 50);
+          setScrollPosition(scrollPercentage);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -187,10 +195,9 @@ export default function DetailsPage() {
       {item.backdrop_path && (
         <div className="absolute inset-0 overflow-hidden">
           <div 
-            className="relative h-full w-[200%] md:w-full"
+            className="relative h-full w-[200%] md:w-full will-change-transform"
             style={{
               transform: `translateX(-${scrollPosition}%)`,
-              transition: 'transform 0.1s ease-out',
             }}
           >
             <Image
