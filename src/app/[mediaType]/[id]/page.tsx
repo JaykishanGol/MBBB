@@ -173,25 +173,33 @@ export default function DetailsPage() {
       if (window.innerWidth >= MOBILE_BREAKPOINT) {
         if (ticking) return;
         ticking = true;
-        rafId = window.requestAnimationFrame(() => {
-          setScrollPosition(0);
+        try {
+          rafId = window.requestAnimationFrame(() => {
+            setScrollPosition(0);
+            ticking = false;
+            rafId = null;
+          });
+        } catch (e) {
           ticking = false;
-          rafId = null;
-        });
+        }
         return;
       }
       
       if (!ticking) {
         ticking = true;
-        rafId = window.requestAnimationFrame(() => {
-          const position = window.scrollY;
-          const viewportHeight = window.innerHeight;
-          // Calculate scroll progress as percentage (0 to MAX_PARALLAX_OFFSET)
-          const scrollPercentage = Math.min((position / viewportHeight) * MAX_PARALLAX_OFFSET, MAX_PARALLAX_OFFSET);
-          setScrollPosition(scrollPercentage);
+        try {
+          rafId = window.requestAnimationFrame(() => {
+            const position = window.scrollY;
+            const viewportHeight = window.innerHeight;
+            // Calculate scroll progress as percentage (0 to MAX_PARALLAX_OFFSET)
+            const scrollPercentage = Math.min((position / viewportHeight) * MAX_PARALLAX_OFFSET, MAX_PARALLAX_OFFSET);
+            setScrollPosition(scrollPercentage);
+            ticking = false;
+            rafId = null;
+          });
+        } catch (e) {
           ticking = false;
-          rafId = null;
-        });
+        }
       }
     };
 
